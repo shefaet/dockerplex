@@ -1,0 +1,11 @@
+docker create \
+  --name=plex \
+  --net=host \
+  -e PUID=1001 \
+  -e PGID=1001 \
+  -e VERSION=docker \
+  -v /home/shefaet/Config/plex:/config \
+  -v /home/shefaet/TV:/tv \
+  -v /home/shefaet/Movies:/movies \
+  -v /home/shefaet/.AppData/plex/transcode:/transcode \
+  linuxserver/plex
