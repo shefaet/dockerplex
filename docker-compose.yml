@@ -76,20 +76,6 @@ services:
             - VIRTUAL_HOST=${TRANSMISSION_HOST}
             - VIRTUAL_PORT=9091
 
-    cardigann:
-        container_name: cardigann
-        image: linuxserver/cardigann
-        ports:
-            - 5060:5060/tcp
-        volumes:
-            - ${CARDIGANN_CONFIG_DIR}:/config
-        environment:
-            - PGID=${PGID}
-            - PUID=${PUID}
-            - TZ=America/New_York
-            - VIRTUAL_HOST=${CARDIGANN_HOST}
-            - VIRTUAL_PORT=5060
-
     jackett:
         container_name: jackett
         image: linuxserver/jackett
@@ -103,3 +89,20 @@ services:
             - PGID=${PGID}
             - PUID=${PUID}
             - TZ=America/New_York
+            - VIRTUAL_HOST=${JACKETT_HOST}
+            - VIRTUAL_PORT=9117
+
+    organizr:
+        container_name: organizr
+        image: linuxserver/organizr
+        ports:
+            - 9983:80/tcp
+        volumes:
+            - ${ORGANIZR_CONFIG_DIR}:/config
+            - /tmp/jackett:/downloads
+            - /etc/localtime:/etc/localtime:ro
+        environment:
+            - PGID=${PGID}
+            - PUID=${PUID}
+            - TZ=America/New_York
+            - VIRTUAL_HOST=${ORGANIZR_HOST}
